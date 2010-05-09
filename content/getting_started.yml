@@ -1,0 +1,117 @@
+:title: Getting Started With Pekky
+:nav_title: Getting Started
+:text: |
+  h2. Installation
+  
+  If you don’t already have Pekky installed you can install it via Ruby Gems.
+  
+  <pre><code>
+  $ gem install pekky
+  </code></pre>
+  
+  h2. Generating
+  
+  The next step is to stub out the various files you need for your project. Open a terminal and cd into the directory where you want to generate the site. Then run the generate command.
+  
+  <pre><code>
+  $ cd Sites
+  $ pekky --generate demo
+  $ cd demo
+  $ ls
+  </code></pre>
+  
+  This will give you a site structure like this:
+    
+  <pre><code>
+  content/
+  public/
+      images/
+      stylesheets/
+      javascripts/
+  views/
+      layouts/
+      partials/
+  site.rb
+  helpers.rb
+  </code></pre>
+  
+  h2. Configuration
+  
+  You can’t do much without first configuring your site. So lets start by opening the site.rb file and adding an index page.
+  
+  <pre><code>
+  Pekky.site do
+    set :title, 'My Awesome Site'
+    set :tempating, 'haml'
+  
+    page '/', 'index', :view => 'default', :layout => 'default'
+  end
+  </code></pre>
+  
+  Firstly, we tell Pekky we want to use the HAML templating language. You will need to insure that you actually have HAML installed. The Pekky gem does not do this automatically — this is because it supports many templating languages and we don’t want to force you to install them all.
+  
+  The first argument to #page is the path where the page will appear. Here we are rendering the page at the root. The second argument is the YAML file we want to pull content from. In this case it is the <code>./content/index.yml</code> file.
+  
+  The last argument is a list of options. Here we are telling Pekky which view we want to use for this page. This is optional. If it is not specified Pekky will use use 'default'. When rendering Pekky will look for <code>./views/default.html.haml</code>
+  
+  The final option is the layout. Same rules as the views — defaulting etc. — but Pekky will look in the layouts dir; <code>./views/layouts/default.html.haml</code>
+  
+  h2. Make Some Files!
+  
+  Lets us make some dummy content so we can test out rendering. First the content. In the <code>./content/index.yml</code> file, add the following bit of code.
+  
+  <pre><code>
+  :title: Hello!
+  :text: |
+    h1. Weee!
+    
+    I miss summer time already. Grrrr.
+  </code></pre>
+  
+  Now for the view in <code>./views/default.html.haml</code>:
+  
+  <pre><code>
+  %h1 = content[:title]
+  = textile(content[:text])
+  </code></pre>
+  
+  When rendering a page, the content pulled from the YAML file is available via the <code>content</code> variable which is a hash. In the YAML file you can see we have prefixed the keys with a colon. This is important since YAML then coerces then into symbols. Without the prefix you will have to access values with string keys i.e. <code>content['title']</code>
+  
+  Now for a basic layout in <code>./views/layouts/default.html.haml</code>:
+
+  <pre><code>
+  %html(xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en")
+    %head
+      %title= "#{config[:title]} - #{content[:title]}"
+      = stylesheet 'test'
+      = javascript 'test'
+    %body
+      = view
+  </code></pre>
+  
+  In the title element we are rendering <code>config[:title]</code> which is drawn from the configuration in your <code>site.rb</code> file. Any values you set in there are available, so it’s a good place to put site-wide values.
+  
+  Then we use the javascript and stylesheet helpers. These are nice shortcuts for generating the markup without having to specify all the boring attributes.
+  
+  The last important bit is in the body tag. The layout has a special local value called <code>view</code>. This is the markup from the view, which you can inject into your layout. If you don’t use it, you won’t get anything from the view, so don’t forget it!
+  
+  h2. Outputting
+  
+  Now for the payoff. We can generate the site.
+  
+  <pre><code>
+  $ pekky --output
+  </code></pre>
+  
+  This will put the generated site into <code>./output</code>. This ouput can then be stuck onto a web server. Hooray!
+  
+  h2. A Few More Things
+  
+  To make your life easier while developing a site you can run the dev server. It’s easy to start:
+    
+  <pre><code>
+  $ pekky --server
+  </code></pre>
+  
+  By default it runs on port 3000. When ever you change the content, templates, or static asset Pekky will automatically regnerate. However if you change the <code>helpers.rb</code> or <code>site.rb</code> file you will need to restart the server.
+  

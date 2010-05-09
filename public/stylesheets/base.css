@@ -86,7 +86,14 @@ pre {
   width: 494px;
 }
 
-code {
+p code {
+  background-color: #FFD11B;
+  border: 1px solid #BC9600;
+  font-family: Monaco, mono-spaced;
+  padding: 1px 4px;
+}
+
+pre code {
   font-family: Monaco, mono-spaced;
   margin-left: -20px;
   display: block;
