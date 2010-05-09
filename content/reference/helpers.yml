@@ -1,0 +1,77 @@
+:title: Using Helpers in Views
+:text: |
+  h2. Custom Helpers
+  
+  When a Pekky site is generated, you will find a <code>helpers.rb</code> file in the root. If it is missing you can easily add it and insert the following code:
+    
+  <pre><code>
+  Pekky.helpers do
+    # Your helpers in here
+  end
+  </code></pre>
+  
+  To add your own custom helpers you define them inside the block passed to <code>Pekky.helpers</code>. Any helpers that you add will then have access to any of the built in helpers in Pekky.
+  
+  Here for example is a helper that loops through all the pages in the site and returns an array of their titles.
+  
+  <pre><code>
+  def titles
+    pages.inject([]) do |a, p|
+      a << p.content[:title]
+      a
+    end
+  end
+  </code></pre>
+  
+  h2. Built in Helpers
+  
+  Pekky ships with a bunch of good stuff. The most important feature of the built-in helpers is that when rendering, every page in the site has access to the entire contents of the site. That means that means you can delve into the contents of another page and do interesting things with it. This is especially useful for creating excerpts from other pages, or displaying the correct title in links.
+  
+  h3. Resource Links
+  
+  You can link to images, stylesheets and javascripts using the built-in helpers. The advantage of doing this is that they ensure the paths have the correct prefix when exporting.
+  
+  * <code>javascript('tricksy')</code>
+  * <code>stylesheet('base')</code>
+  * <code>image('smiling.jpg', :alt => 'Are They Lies?')</code>
+  
+  h3. Linking
+  
+  This is just a dumb little helper that makes it a bit easier to make links. Here is an example of linking to an internal page and another one linking to a remote site.
+  
+  <pre><code>
+  = link(page.content[:title], page.path)
+  = link('GitHub', 'http://github.com')
+  </code></pre>
+
+  h3. The Current Page
+  
+  You can check to see if the page is a child of another, or if it is hidden — it will not appear in the top level nav.
+  
+  * Is hidden: <code>hidden?</code>
+  * Is a child: <code>child?</code>
+  
+  h3. Other pages
+  
+  Each page can also examine every other page in the site. The <code>#pages</code> helper returns an array of the pages arranged in a tree. Here is an example of a custom helper that collects all the child pages.
+  
+  <pre><code>
+  def only_children
+    pages.inject([]) do |a, p|
+      a.push(*p.children)
+      a
+    end
+  end
+  </code></pre>
+
+  As you can see, each page in the site has a <code>#children</code> accessor. This will allow you to recurse through the site stucture. An an example; this would be useful for generating a site-map.
+  
+  There are a bunch of other good helpers too:
+  
+  * Content: <code>content</code>  
+  * All pages: <code>pages</code>
+  * Top level pages (not hidden): <code>nav</code>
+  * Child pages: <code>children</code>
+  * Parent page: <code>parent</code>
+  * Ancestors (good for bread-crumbs): <code>ancestors</code>
+  * Path to current page: <code>path</code>

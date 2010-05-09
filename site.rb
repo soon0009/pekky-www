@@ -8,4 +8,5 @@ Pekky.site do
   # References
   page '/reference', 'reference/list', :view => 'reference_list'
   page '/reference/templates', 'reference/templates'
+  page '/reference/helpers', 'reference/helpers'
 end
