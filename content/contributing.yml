@@ -1,0 +1,28 @@
+:title: Contibuting to Pekky
+:nav_title: Contributing 
+:text: |
+  h2. Will You?!
+  
+  I’d love it if you felt like contributing to Pekky. More than anything I need people to start using it, bug-testing it and giving me feed back on the API and potential features it needs. So even if you can’t contribute code, there is much you can do.
+  
+  If you need to contact me in any way, you can message me on "GitHub":http://github.com/lukesutton
+  
+  h2. Contributing Code
+  
+  If you feel like contributing code, the first thing you should do is make a fork of the project on GitHub. If you don’t have a GitHub account, you should get one of those first :)
+  
+  h3. Dependencies
+  
+  Once you have forked the repo and cloned it to your local machine, you will need to install the following dependencies:
+    
+  * "Rocco":http://github.com/rtomayko/rocco - Generating documentation
+  * "Bacon":http://github.com/chneukirchen/bacon - Running specs
+  * "Thor":http://github.com/wycats/thor - Task runner
+  
+  h3. Todos
+  
+  Have a look in the <code>README</code> file. It’ll show any jobs that need doing. In particular Pekky needs better spec coverage and documentation of the API. What can I say? I’m a bit slack sometimes.
+  
+  h3. Contributing Back
+  
+  Once you make your changes, commit, push to your GitHub fork, then send me a fork request. First accepted patch earns a high-five and a commit-bit on the main repo.

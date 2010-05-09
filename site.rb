@@ -14,4 +14,6 @@ Pekky.site do
   page '/reference/models',         'reference/models'
   page '/reference/markup',         'reference/markup'
   page '/reference/shared-content', 'reference/shared_content'
+  
+  page '/contributing', 'contributing'
 end
