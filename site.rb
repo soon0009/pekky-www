@@ -10,4 +10,6 @@ Pekky.site do
   page '/reference/templates',  'reference/templates'
   page '/reference/helpers',    'reference/helpers'
   page '/reference/generating', 'reference/generating'
+  page '/reference/console',    'reference/console'
+  page '/reference/models',     'reference/models'
 end

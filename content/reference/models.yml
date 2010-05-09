@@ -1,0 +1,95 @@
+:title: Using an ORM
+:text: |
+  h2. It’s Plain Old Ruby
+  
+  There is nothing particularly difficult about using models with Pekky. The only issue is that it requires a little more plumbling than a web-framework generally demands. The reason for this is simple; it means Pekky doesn’t impose any restrictions on how you use it. It doesn’t favour any particular ORM or persistence strategy.
+  
+  Do what you want! :)
+  
+  h2. Bootstrapping
+  
+  For this example I’m going to use DataMapper, coz I think it’s rockin’. I’m going to use it with an SQLite database and a few models.
+  
+  The site directory has been organised like this:
+    
+  <pre><code>
+  content/
+  db/
+  models/
+  public/
+  views/
+  helpers.rb
+  site.rb
+  </code></pre>
+  
+  The directories we care about here are <code>db</code> and <code>models</code>. <code>db</code> is where we are going to store the SQLite database. <code>models</code> is where the DataMapper models will live.
+  
+  Let’s configure things in <code>site.rb</code>:
+    
+  <pre><code>
+  Pekky.site do
+    require 'datamapper'
+    DataMapper.setup(:default, 'sqlite3://db/site')
+    Dir['models/*.rb'].each do |m|
+      require m
+    end
+  end
+  </code></pre>
+  
+  Require DataMapper, connect to the database stored in the <code>db</code> directory -- it will create it if it’s missing — and require all the models.
+  
+  Now, lets make a model to test things out:
+    
+  <pre><code>
+  class Post
+    include DataMapper::Resource
+
+    property :id,         Serial
+    property :title,      String
+    property :body,       Text
+    property :created_at, DateTime
+  end
+  </code></pre>
+  
+  Before we get into generating pages we need to migrate the database so it contains the posts table. We can do this by starting a console session.
+  
+  <pre><code>
+  $ pekky -c
+  irb(main):001:0> DataMapper.auto_migrate!
+  </code></pre>
+  
+  This could also be scripted via a Rake or Thor task, but I will leave that as an exercise for the reader.
+  
+  h2. Generating Pages
+  
+  Now lets imagine we magically got some data into the DB — if you want to do this yourself, you could add some test data via the console. Lets actually generate some pages.
+  
+  Inside the <code>site.rb</code> we need to make a call to the <code>#generate</code> method. From there we retreive the posts from the DB and iterate over them, making a page for each.
+  
+  <pre><code>
+  generate 'posts/:id' do
+    posts = Posts.all
+    posts.each do |p|
+      content = {:post => p}
+      render 'post', :id => p.id, :content => content
+    end
+  end
+  </code></pre>
+  
+  To make this code actually work, we’ll need to have a post template. I’m going to use HAML in this example coz it is also rockin’.
+  
+  Stick this code in the file <code>./views/posts.html.haml</code>:
+    
+  <pre><code>
+  %h1= content[:post].title
+  = textile(content[:post].body)
+  </code></pre>
+  
+  Now we can output the site.
+  
+  <pre><code>
+  $ pekky -o
+  </code></pre>
+  
+  For every post in the database, you should now see a file folder inside <code>./output/posts</code>. Easy!
+  

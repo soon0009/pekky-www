@@ -1,0 +1,48 @@
+:title: Using the Console
+:text: |
+  h2. Starting a Console Session
+  
+  Pekky ships with a console to be used while developing. Starting it is easy as:
+    
+  <pre><code>
+  $ cd my_site
+  $ pekky --console
+  </code></pre>
+  
+  This loads and builds your site, the starts an IRB session. From this prompt you can inspect the entire site. You can ask the site to be rebuilt, examine the pages, or inspect the configuration.
+  
+  To rebuild the site from the prompt, we might do this:
+    
+  <pre><code>
+  irb(main):001:0> Pekky.build
+  </code></pre>
+  
+  To examine the configuration you can inspect the <code>SiteConfig</code> module:
+    
+  <pre><code>
+  irb(main):001:0> Pekky::SiteConfig[:view_dir]
+  </code></pre>
+
+  h2. Working With Models
+  
+  If you are using a database and an ORM to generate pages in the site, you may need to debug them at some point. Imagine a scenario where we are using DataMapper and we have defined some models and required them in our <code>site.rb</code> file.
+  
+  While attempting to debug some code in a model, I could actuall load it up in an IRB session and inspect it.
+  
+  <pre><code>
+  $ pekky -c
+  Welcome to the Pekky console
+          Some useful methods:
+
+          Pekky.pages
+          Pekky.build
+          Pekky.build!
+
+  irb(main):001:0> u = Users.new :name => 'Luke'
+  irb(main):002:0> u.valid?
+  => false
+  irb(main):003:0> u.name.inspect
+  => 'Luke'
+  </code></pre>
+  
+  This makes it easy to debug without having to do all sorts of puts inside your templates. The one caveat is that there is no code-reloading. If you make changes to your code you will have to restart your IRB session. Changes to the content files and templates will still be picked up by <code>Pekky.build</code>.
