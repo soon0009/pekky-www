@@ -1,0 +1,7 @@
+= textile(content[:intro])
+
+%ul#features-list
+  - content[:features].each do |feature|
+    %li{:id => "feature-#{feature[0]}"}= feature[1]
+    
+= textile(content[:example])

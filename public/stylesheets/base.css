@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+body {
+  background: url(/images/page-bkg.jpg);
+  font-family: Monaco, mono-spaced;
+  font-size: 12px;
+  color: #131313;
+  margin-top: 55px;
+}
+
+#logo {
+  width: 335px;
+  float: left;
+}
+
+#logo a {
+  background: top center no-repeat url(/images/logo.gif);
+  width: 335px;
+  height: 264px;
+  display: block;
+  /* Hide the text */
+  letter-spacing: -1000em;
+  text-indent: -1000em;
+}
+
+#meta-links {
+  font-size: 11px;
+  list-style: none;
+}
+
+#contents {
+  border-left: 2px solid #A3D7D7;
+  padding-left: 65px;
+  margin-bottom: 55px;
+  width: 500px;
+  float: left;
+}
+
+a {
+  color: #3333CC !important;
+}
+a:visited {
+  color: #666666 !important;
+}
+
+h1,
+h2,
+h3,
+p, 
+ul,
+pre {
+  width: 100%;
+  float: left;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+h2 {
+  border-top: 1px solid #cccccc;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding-top: 25px;
+  margin-top: 5px;
+}
+
+ul, 
+p,
+pre {
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+pre {
+  background-color: #FFD11B;
+  border-left: 6px solid #BC9600;
+  line-height: 1;
+  width: 494px;
+}
+
+code {
+  font-family: Monaco, mono-spaced;
+  margin-left: -20px;
+  display: block;
+}
+
+#features-list,
+#nav {
+  border-top: 1px solid #cccccc;
+  padding-top: 25px;
+  margin-top: 5px;
+}
+
+#nav {
+  padding-left: 20px;
+}
+
+#features-list {
+  list-style-type: none;
+  margin-bottom: 5px;
+}
+
+#features-list li {
+  background: 0px 5px no-repeat;
+  padding-left: 40px;
+  padding-bottom: 15px;
+  width: 460px;
+}
+
+#feature-linking {background-image: url(/images/feature-link.gif) !important;}
+#feature-templating {background-image: url(/images/feature-templating.gif) !important;}
+#feature-generate {background-image: url(/images/feature-generate.gif) !important;}
+#feature-templates {background-image: url(/images/feature-templates.gif) !important;}
+#feature-helpers {background-image: url(/images/feature-helpers.gif) !important;}
+
+#footer-title {
+  position: absolute;
+  left: -1000em;
+}
+
+#footer-text {
+  border-top: 1px solid #cccccc;
+  font-size: 10px;
+  padding-top: 25px;
+  margin-bottom: 0;
+}

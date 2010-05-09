@@ -1,0 +1,67 @@
+:title: A flexible and unfussy static site builder
+:nav_title: Home
+:intro: |
+  h2. But Why?
+  
+  Look, I know there are a bajillion site generators already, but this one is mine and it does what I want. For starters, it's simple and hackable. The actual codebase is quite small. Barring some mis-organisation on my part it should be readable enough. Secondly, it abandons the idea of magic and instead asks users to be explicit about what they are generating. This allows for reuse of content across a site and other clever tricks.
+
+:features:
+  - 
+    - linking
+    - Explicitly link content to templates and output paths, allowing easy reuse. You could for example render a page in HTML and JSON formats.
+    
+  - 
+    - templating
+    - Use any templating language supported by Tilt. This includes, HAML, ERB, Erubis etc.
+    
+  -
+    - generate
+    - Generate pages from any source — CSV files, databases, web API calls. Templates can be shared between static pages and those dynamically generated.
+    
+  -
+    - templates
+    - Templates are broken up into layouts, views and partials. Allowing for markup to be easily reused across the various pages in your site.
+    
+  -
+    - helpers
+    - Custom helpers can be easily added using the helpers.rb file. No special magic or registering required.
+  
+:example: |
+  h2. An Example
+  
+  The basic structure of the site looks like this:
+    
+  <pre><code>
+  content/
+      index.yml
+  public/
+      images/
+      stylesheets/
+      javascripts/
+  views/
+      default.html.haml
+      layouts/
+          default.html.haml
+      partials/
+          partial.html.haml
+  site.rb
+  helpers.rb
+  </code></pre>
+  
+  Every site has a site.rb file, which is used to define the pages to be generated along with any general configuration details.
+  
+  <pre><code>
+  # ./site.rb
+
+  Pekky.site do
+    page '/', 'index'
+  end
+  </code></pre>
+  
+  Using the configuration above a site can be generated using the pekky command:
+    
+  <pre><code>
+  $ pekky --output
+  </code></pre>
+  
+  This will render the site into the output directory of the project. For a more detailed introduction, have a look at the Getting Started page.

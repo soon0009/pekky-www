@@ -1,0 +1,29 @@
+%html(xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en")
+  %head
+    %title= "#{config[:title]} - #{content[:title]}"
+    = stylesheet 'base'
+  %body
+    %h1#logo 
+      = link 'Pekky', '/', :alt => 'Return to the frontpage.'
+    %div#contents
+      %h1= content[:title] || config[:title]
+      %ul#meta-links
+        %li
+          Made by:
+          %a{:href => 'http://lukematthewsutton.com'} http://lukematthewsutton.com          
+        %li
+          Github project:
+          %a{:href => 'http://github.com/lukesutton/pekky'} http://github.com/lukesutton/pekky
+      
+      %ul#nav
+        - nav.each do |p|
+          %li= link(p.content[:nav_title], p.path, :alt => "Go to #{p.content[:nav_title]}")
+      
+      = view
+      
+      %h1#footer-title Credits
+      %p#footer-text
+        This site © 2010 Luke Matthew Sutton | Made with Pekky!
+        %br
+        Icons courtesy of 
+        %a{:href => 'http://glyphish.com', :alt => 'Visit the Glyphish site.'} glyphish.com
