@@ -36,7 +36,6 @@ body {
 #contents {
   border-left: 2px solid #A3D7D7;
   padding-left: 65px;
-  margin-bottom: 55px;
   width: 500px;
   float: left;
 }
@@ -137,5 +136,5 @@ pre code {
   border-top: 1px solid #cccccc;
   font-size: 10px;
   padding-top: 25px;
-  margin-bottom: 0;
+  margin-bottom: 55px;
 }
