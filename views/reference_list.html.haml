@@ -1,0 +1,7 @@
+= textile(content[:text])
+
+%h2 References
+
+%ul
+  - children.each do |c|
+    %li= link(c.content[:title], c.path)

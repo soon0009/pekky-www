@@ -31,6 +31,7 @@ body {
 #meta-links {
   font-size: 11px;
   list-style: none;
+  padding-left: 0 !important;
 }
 
 #contents {
@@ -71,6 +72,10 @@ h2 {
   margin-top: 5px;
 }
 
+h3 {
+  font-weight: bold;
+}
+
 ul, 
 p,
 pre {
@@ -85,17 +90,22 @@ pre {
   width: 494px;
 }
 
-p code {
-  background-color: #FFD11B;
+p code,
+li code {
+  background-color: #ffffff;
   border: 1px solid #BC9600;
   font-family: Monaco, mono-spaced;
-  padding: 1px 4px;
+  padding: 0 4px;
 }
 
 pre code {
   font-family: Monaco, mono-spaced;
   margin-left: -20px;
   display: block;
+}
+
+ul {
+  padding-left: 20px;
 }
 
 #features-list,
@@ -105,12 +115,9 @@ pre code {
   margin-top: 5px;
 }
 
-#nav {
-  padding-left: 20px;
-}
-
 #features-list {
   list-style-type: none;
+  padding-left: 0;
   margin-bottom: 5px;
 }
 

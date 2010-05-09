@@ -1,0 +1,75 @@
+:title: Choosing and Working With Templates
+:text: |
+  h2. Choose a Templating Language
+  
+  Pekky supports any templating language that Tilt supports — with one caveat, see below. By default Pekky uses HAML, but this is trival to change. In your <code>site.rb</code> modify the <code>:templating</code> config option.
+  
+  <pre><code>
+  Pekky.site do
+    set :templating, 'haml'
+    
+    # ...
+  end
+  </code></pre>
+  
+  The <code>:templating</code> option should be set to the extension used by the templating language. Here is a list of the supported libraries and their extensions:
+    
+  * Erb (.erb)
+  * Erubis (.erb)
+  * HAML (.haml)
+  * Liquid (.liquid)
+  
+  h3. Naming Files
+  
+  Views should then use the convention of <code><name>.<format>.<extension></code>. For example a HAML view would be named <code>view.html.haml</code>.
+  
+  h3. Mustache?
+  
+  Unfortunately Pekky doesn’t play nice with Mustache. This makes me sad, since I really like it, but I wasn’t able to find a nice way to get it to play with arbitary contexts. This is something I hope to resolve, but for now we are bereft of Mustache’s hirsute joys.
+
+  h2. Specifying Templates
+  
+  When defining a page you have the option of specifying both the view and the layout templates. If you omit these options, Pekky will just use the <code>default.html.<template></code> files for the view and layout.
+  
+  Custom templates are specified with the <code>:view</code> and <code>:layout</code> options.
+  
+  <pre><code>
+  page '/help', 'help', :view => 'help/index', :layout => 'help'
+  </code></pre>
+  
+  As you can see in the <code>:view</code> option, templates can be nested within folders if you need a bit of extra organisation.
+
+  h2. Partials
+  
+  Partials can be used within the views and layouts using the <code>#partial</code> helper. Here is an example in HAML.
+  
+  <pre><code>
+  %div#profile
+    = partial('profile')
+  </code></pre>
+  
+  Partials have access to the page’s context, so everything you can do in the views and layouts, you can do in the partials. Partials may also be nested in directories like the other templates.
+
+  h2. File Locations
+  
+  Pekky has a set of default locations for where templates live, but these can be overridden if you need. The defaults are:
+    
+  * Views: <code>./views</code>
+  * Layouts: <code>./views/layouts</code>
+  * Partials: <code>./views/partials</code>
+
+  These locations can be overridden in your <code>site.rb</code>. Just use the <code>#set</code> method.
+  
+  <pre><code>
+  Pekky.site do
+    set :view_dir, 'special_views'
+    
+    # ...
+  end
+  </code></pre>
+  
+  The options for each are:
+    
+  * Views: <code>:view_dir</code>
+  * Layouts: <code>layouts_dir</code>
+  * Partials: <code>:partials_dir</code>
