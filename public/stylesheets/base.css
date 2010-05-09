@@ -115,6 +115,20 @@ ul {
   margin-top: 5px;
 }
 
+#nav {
+  list-style-type: none;
+  padding: 10px 0 0 0;
+}
+
+#nav li {
+  display: inline;
+}
+
+#nav a {
+  float: left;
+  margin-right: 10px;
+}
+
 #features-list {
   list-style-type: none;
   padding-left: 0;

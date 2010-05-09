@@ -1,0 +1,50 @@
+:title: Generating Pages
+:text: |
+  h2. Pages From Thin Air
+  
+  Unlike other static generators, Pekky allows you to generate pages from sources other than static files on disk. Additionally it allows you to generate paths at programatically defined paths. This is best illustrated with an example. 
+  
+  Say we have a bunch of user profiles stored in a database somewhere. For the sake of the example lets just assume the database and models have already been set up and the models have been required in you <code>site.rb</code> file.
+  
+  We want to be able to loop through the profiles and for each profile generate a page. The path for each should be a sanitised version of the person’s name.
+  
+  This is done inside the <code>site.rb</code> file using the <code>#generate</code> method. Here is how we would code the above example.
+  
+  <pre><code>
+  Pekky.site do
+    generate '/profiles/:name' do
+      profiles = Profiles.all
+      profiles.each do |p|
+        content = {:profile => p}
+        name = p.name.slug # magic method that makes our slug, hurrah!
+        render 'profile', :name => name, :content => content
+      end
+    end
+  end
+  </code></pre>
+  
+  Now this bears some explanation obviously. The first argument to <code>#generate</code> is the path pattern you want to use when generating the pages. Place-holders are specified with a colon as a prefix. In the example above <code>:name</code> is a place-holder. This place holder is replaced in the path when generating the pages. The paths can be arbitrarily complex. For example you can specify the path <code>/profiles/:department/:name</code>, as long as you provide the <code>:department</code> and <code>:name</code> values on render.
+  
+  The block is the bit that’s used to generate the pages. Basically, whenever <code>#render</code> gets called a page is generated. What this means is that you can generate pages from literally any source. In this example we’re using a DB, but it could just as easily be a CSV, or a call to a web API.
+  
+  Lets have a look at that <code>#render</code> call in a little more detail.
+  
+  <pre><code>
+  render 'profile', :name => name, :content => content
+  </code></pre>
+  
+  The first argument is the name of the template to be used. Simple. The second argument is the options used when rendering. These options must include the place-holders specified in the generate path. In this case you can see <code>:name</code> is being set in the options. The second part is setting the contents for the page. This is optional, but probably a good idea, otherwise your pages aren’t going to be very interesting.
+  
+  h2. Some More Examples
+  
+  Here are some more complex examples of paths that you can specify.
+  
+  <pre><code>
+  generate '/people/management/:name' {}
+  generate '/people/management/:position' {}
+  generate '/people/employees/:name' {}
+  generate '/people/employees/:name/hobbies/:hobby' {}
+  generate '/help-:category' {}
+  </code></pre>
+  
+  

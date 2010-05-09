@@ -6,7 +6,8 @@ Pekky.site do
   page '/getting-started', 'getting_started'
   
   # References
-  page '/reference', 'reference/list', :view => 'reference_list'
-  page '/reference/templates', 'reference/templates'
-  page '/reference/helpers', 'reference/helpers'
+  page '/reference',            'reference/list', :view => 'reference_list'
+  page '/reference/templates',  'reference/templates'
+  page '/reference/helpers',    'reference/helpers'
+  page '/reference/generating', 'reference/generating'
 end
