@@ -12,4 +12,5 @@ Pekky.site do
   page '/reference/generating', 'reference/generating'
   page '/reference/console',    'reference/console'
   page '/reference/models',     'reference/models'
+  page '/reference/markup',     'reference/markup'
 end

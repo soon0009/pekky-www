@@ -3,10 +3,23 @@
 :text: |
   h2. Installation
   
-  If you don’t already have Pekky installed you can install it via Ruby Gems.
+  If you don’t already have Pekky installed you can install it via RubyGems.
   
   <pre><code>
   $ gem install pekky
+  </code></pre>
+  
+  h2. Dependencies
+  
+  You need to decide what libraries you are going to use for templating — HAML, Erb etc. — and for markdown processing — Textile or Markdown.
+  
+  Pekky does not install any of these by default, otherwise it would give you a bunch of libraries you’re not going to use.
+  
+  Anyhow for this example I’m going to use HAML and Textile. For Textile you must use the RedCloth library.
+  
+  <pre><code>
+  $ gem install haml
+  $ gem install RedCloth
   </code></pre>
   
   h2. Generating

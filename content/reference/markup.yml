@@ -1,0 +1,30 @@
+:title: Using Textile or Markdown
+:text: |
+  h2. Textile or Markdown?
+  
+  It’s totally up to you. Currently Pekky lets you use either, although only through specific libraries, although this may change in the future. Markdown is supported through Rdiscount and Textile is handled with RedCloth. 
+  
+  Pekky does not install either of these libraries, so you will need to install the one you want to use.
+  
+  h2. Usage
+  
+  Using a particular markup language is easy enough. Firstly inside one of your content YAML files you need to add some markup.
+  
+  <pre><code>
+  :title: Weee!
+  :text: |
+    h2. Get Bent
+    
+    That’s what I wish I had said anyway.
+  </code></pre>
+  
+  In this example I’m using Textile, so inside of my view I will need to use the <code>#textile</code> helper.
+  
+  <pre><code>
+  %div#article
+    %h1= content[:title]
+    = textile(content[:text])
+  </code></pre>
+  
+  To use Markdown instead, you just call the <code>#markdown</code> helper.
+  
