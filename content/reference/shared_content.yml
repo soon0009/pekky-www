@@ -1,0 +1,51 @@
+:title: Sharing Content Between Pages
+:text: |
+  h2. Don’t Be Parsimonious With Content
+  
+  While you can use the configuration in <code>site.rb</code> to specify the content for a particular page, within each template you can load additional content. This allows you to share content across pages and even access the content for another page.
+  
+  Lets say we’re putting our shared content into <code>./content/shared</code>. Within a template we can access any files in that directory like so:
+    
+  <pre><code>
+  - get('shared/jam')[:ingredients].each do |i|
+    %p= i
+  </code></pre>
+  
+  Note that shared content can be in any folder we just use <code>shared</code> as a conventions.
+  
+  h3. Share Collections
+  
+  In addition to sharing single YAML files, you can also load a collection of files from a directory. If we have a bunch of files in a directory called <code>./content/shared/people</code>, we could do this:
+    
+  <pre><code>
+  - get('shared/people').each do |p|
+    %p= p[:name]
+  </code></pre>
+  
+  Additionally the content that comes back can be sorted. All you have to do is specify an additional param, which is the field to sort on. So modifying the example above we can do:
+    
+  <pre><code>
+  - get('shared/people', :name).each do |p|
+    %p= p[:name]
+  </code></pre>
+  
+  This will ensure that the people are rendered in alphabetical order. In the future this sorting will be augmented by the ability to do multiple sorts, to sort ascending or decending. Additionally I will be adding the ability to filter the results.
+  
+  In this way, it should serve as a very simple data-store and obviate the need for a database in most sites.
+  
+  h2. Generating Pages
+  
+  Pages can also be generated using shared contents. Inside of your <code>site.rb</code> you can do the following:
+    
+  <pre><code>
+  generate '/people/:nick' do
+    get('shared/people').each do |p|
+      nick = p[:nick].downcase
+      content = {:person => p}
+      render 'person', :nick => nick, :content => content
+    end
+  end
+  </code></pre>
+  
+  This will generate a page for each YAML file in the <code>./content/shared/people</code> directory.
+  
