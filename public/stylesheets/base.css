@@ -7,7 +7,7 @@
 
 body {
   background: url(../images/page-bkg.jpg);
-  font-family: Monaco, mono-spaced;
+  font-family: Monaco, Courier, monospace;
   font-size: 12px;
   color: #131313;
   margin-top: 55px;
@@ -96,12 +96,12 @@ p code,
 li code {
   background-color: #ffffff;
   border: 1px solid #BC9600;
-  font-family: Monaco, mono-spaced;
+  font-family: Monaco, Courier, monospace;
   padding: 0 4px;
 }
 
 pre code {
-  font-family: Monaco, mono-spaced;
+  font-family: Monaco, Courier, monospace;
   line-height: 1.5;
   margin-left: -25px;
   display: block;
