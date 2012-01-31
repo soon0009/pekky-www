@@ -57,13 +57,13 @@
     set :title, 'My Awesome Site'
     set :tempating, 'haml'
   
-    page '/', 'index', :view => 'default', :layout => 'default'
+    page 'homepage', '/', 'index', :view => 'default', :layout => 'default'
   end
   </code></pre>
   
   Firstly, we tell Pekky we want to use the HAML templating language. You will need to insure that you actually have HAML installed. The Pekky gem does not do this automatically — this is because it supports many templating languages and we don’t want to force you to install them all.
   
-  The first argument to #page is the path where the page will appear. Here we are rendering the page at the root. The second argument is the YAML file we want to pull content from. In this case it is the <code>./content/index.yml</code> file.
+  The first argument to #page is the name of the page. The second arument is the path where the page will appear. Here we are rendering the page at the root. The third argument is the YAML file we want to pull content from. In this case it is the <code>./content/index.yml</code> file.
   
   The last argument is a list of options. Here we are telling Pekky which view we want to use for this page. This is optional. If it is not specified Pekky will use use 'default'. When rendering Pekky will look for <code>./views/default.html.haml</code>
   
@@ -84,8 +84,8 @@
   Now for the view in <code>./views/default.html.haml</code>:
   
   <pre><code>
-  %h1 = content[:title]
-  = textile(content[:text])
+  %h1= content[:title]
+  = format.textile(content[:text])
   </code></pre>
   
   When rendering a page, the content pulled from the YAML file is available via the <code>content</code> variable which is a hash. In the YAML file you can see we have prefixed the keys with a colon. This is important since YAML then coerces then into symbols. Without the prefix you will have to access values with string keys i.e. <code>content['title']</code>
